@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+    {% comment %} <div class="container-fluid"> {% endcomment %}
+        <a class="navbar-brand" href="#">SlipKart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto ">
+          <a class="nav-link" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+{% comment %} Use container for layouts where you want content to remain centered and adjust to common screen sizes (like a boxed layout).
+Use container-fluid for layouts where you need content to span the full width of the screen (e.g., a full-width header or footer). {% endcomment %}
+
+{% comment %} ms-auto Explanation:
+Bootstrap Utility Class: ms-auto is a Bootstrap utility class where:
+ms stands for margin-start (left in left-to-right languages like English).
+auto automatically adjusts the margin, effectively pushing the element to the rightmost position within its container. {% endcomment %}
