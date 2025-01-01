@@ -10,6 +10,7 @@ import os
 # 2. Saving Categories:
 # When creating a Category object, you can optionally upload an image. If no image is provided, the image field will remain empty.
 
+# Function to generate a unique file path for uploaded files
 def getFileName(request,FileName):
     now_time=datetime.datetime.now().strftime("%Y%m%d%H:%M:%S")
     new_FileName="%s%s"%(now_time,FileName)
@@ -23,8 +24,8 @@ class Category(models.Model):
     # trending=models.BooleanField(default=False,help_text="0-default,1-Trending")
     created_at=models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     category=models.ForeignKey(Category,on_delete=models.CASCADE) # foreign key of the category class data
@@ -39,5 +40,5 @@ class Product(models.Model):
     trending=models.BooleanField(default=False,help_text="0-default,1-Trending")
     created_at=models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
