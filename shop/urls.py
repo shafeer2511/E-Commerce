@@ -16,10 +16,11 @@ Here's an overview of the process flow for rendering a template in Django when a
 6. **Browser Displays**: The browser displays the rendered HTML page to the user. 
 
 """
-
+from django.contrib import admin
 from django.urls import path
 from . import views  ## '.' means current project 
 urlpatterns = [
-    path('home',views.home,name="home"),
-    path('register',views.register,name="register"),
+    path('admin/',admin.site.urls),
+    path('home/',views.home,name="home"),
+    path('register/',views.register,name="register"),
 ]
