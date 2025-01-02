@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
-    list_display=('name','image','description','created_at')
+    list_display=('name','image','description','created_at','status')
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'vendor', 'quantity', 'original_price', 'selling_price', 'status', 'trending', 'created_at')
     search_fields = ('name', 'vendor')  # Adds a search bar for these fields
