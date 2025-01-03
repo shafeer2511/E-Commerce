@@ -21,7 +21,11 @@ from django.urls import path
 from . import views  ## '.' means current project directory 
 urlpatterns = [
     # path('admin/',admin.site.urls),
+#     Purpose of the 'name' Parameter
+# Template Usage: The name allows you to use the {% url %} template tag to generate URLs
     path('',views.home,name="home"),
     path('register/',views.register,name="register"),
-    path('collection/',views.collection,name='collection')
+    path('collection/',views.collection,name='collection'),
+    path('collection/<str:name>',views.collectionview,name='collection'),
+    path('collection/<str:cname>/<str:pname>',views.product_details,name='product_details')
 ]
