@@ -26,3 +26,39 @@ a{
     border-radius: 5px;
     margin-bottom: 2px;
   }
+
+  .breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: #6c757d;
+}
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #007bff;
+}
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.pic-box{
+    position: relative;
+}
+.hot{
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    display: inline;
+    border-radius: 5px;
+    width: 60px;
+    text-align: center;
+    padding: 4px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 10;
+}   
