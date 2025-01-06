@@ -2,10 +2,30 @@ from django.shortcuts import render,redirect
 from . models import *
 from django.contrib import messages
 def home(request):
-    return render(request,'shop/index.html')
+    products=Product.objects.filter(trending=1)
+    return render(request,'shop/index.html',{'products':products})
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 def register(request):
-    return render(request,'shop/register.html')
+    if request.method == 'POST':
+        full_name = request.POST['full_name']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+        gender = request.POST['gender']
+
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match!")
+            return redirect('register')
+
+        # Save data or handle logic here
+        messages.success(request, "Account created successfully!")
+        return redirect('home')
+
+    return render(request, 'shop/register.html')
+
 
 def collection(request):
     catagory=Category.objects.filter(status=1)
