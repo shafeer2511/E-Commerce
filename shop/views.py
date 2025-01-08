@@ -6,26 +6,24 @@ def home(request):
     products=Product.objects.filter(trending=1)
     return render(request,'shop/index.html',{'products':products})
 
+def login(request):
+    return render(request,'shop/login.html')
 
 def register(request):
-    # if request.method == 'POST':
-    #     full_name = request.POST['full_name']
-    #     email = request.POST['email']
-    #     password = request.POST['password']
-    #     confirm_password = request.POST['confirm_password']
-    #     gender = request.POST['gender']
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have created a user. You can log in now!")
+            return redirect('/login')
+        else:
+            # Show validation errors if the form is invalid
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = CustomUserForm()  # Display an empty form for GET requests
+    
+    return render(request, 'shop/register.html', {'form': form})
 
-    #     if password != confirm_password:
-    #         messages.error(request, "Passwords do not match!")
-    #         return redirect('register')
-
-    #     # Save data or handle logic here
-    #     messages.success(request, "Account created successfully!")
-    #     return redirect('home')
-
-    # return render(request, 'shop/register.html')
-    form=CustomUserForm()
-    return render(request,'shop/register.html',{'form':form})
 
 
 def collection(request):
