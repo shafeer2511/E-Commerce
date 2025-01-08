@@ -24,6 +24,7 @@ urlpatterns = [
 #     Purpose of the 'name' Parameter
 # Template Usage: The name allows you to use the {% url %} template tag to generate URLs
     path('',views.home,name="home"),
+    path('login/',views.login,name='login'),
     path('register/',views.register,name="register"),
     path('collection/',views.collection,name='collection'),
     path('collection/<str:name>',views.collectionview,name='collection'),
