@@ -11,8 +11,27 @@
               <h3>Register YourSelf</h3>
               <hr style='border:color: black'>
               {% include "shop/inc/message.html" %}
-              <h3>Login Your Credentials</h3>
             </div>
         </div>
+        <section class='py-4'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-6'>
+                        <form method='POST' action="">
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <label for="" class="form-label">User Name</label>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter User Name">
+                              </div>
+                              <div class="mb-4">
+                                <label for="" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
+                              </div>
+                              <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 {% endblock content %}
