@@ -1,0 +1,80 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+  Cart | ShopKart
+{% endblock title %}
+{% block content %}
+  
+<section class="bg-light py-4 my-5" style="min-height:600px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3">Cart Items</h4>
+        <hr style="border-color:#b8bfc2;">
+        {% include 'shop/inc/message.html' %}
+      </div>
+      
+      <table class='table table-bordered'>
+          <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Remove Item</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items">
+            {% for item in cart %}
+            <tr>
+                <td>
+                  <img src="{{ item.product.product_image.url }}" height="75px" alt="{{ item.product.name }}">
+                </td>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.product.selling_price }}</td>
+                <td>{{ item.product_qty }}</td>
+                <td class="amount">{{ item.total_cost }}</td>
+                <td>
+                  <a href="{% url 'remove_cart' item.id %}" onclick="return confirm('Are You Sure to Remove?')" class='btn btn-danger ' ><i class='fa fa-trash'></i>Remove</a> 
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4"><b>Total Amount</b></td>
+              <td id='net' class="text-primary"><b>0</b></td>
+              <td></td>
+            </tr>
+          </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Function to calculate the total amount
+      function calculateTotal() {
+        const amounts = document.querySelectorAll(".amount");
+        let total = 0;
+  
+        amounts.forEach(amountCell => {
+          total += parseFloat(amountCell.textContent) || 0;
+        });
+  
+        // Update the Total Amount field
+        document.getElementById("net").textContent = total.toFixed(2);
+      }
+  
+      // Initial calculation
+      calculateTotal();
+  
+      // Event listener for removing an item
+      
+      
+    });
+  </script>
+  
+
+{% endblock content %}
