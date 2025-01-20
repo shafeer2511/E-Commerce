@@ -24,9 +24,13 @@ urlpatterns = [
 #     Purpose of the 'name' Parameter
 # Template Usage: The name allows you to use the {% url %} template tag to generate URLs
     path('',views.home,name="home"),
-    path('login/',views.login,name='login'),
+    path('login/',views.login_page,name='login'),
+    path('logout/',views.logout_page,name='logout'),
     path('register/',views.register,name="register"),
+    path('cart',views.cart_page,name='cart'),
+    path('remove_cart/<str:cid>',views.remove_cart,name='remove_cart'),
     path('collection/',views.collection,name='collection'),
     path('collection/<str:name>',views.collectionview,name='collection'),
-    path('collection/<str:cname>/<str:pname>',views.product_details,name='product_details')
+    path('collection/<str:cname>/<str:pname>',views.product_details,name='product_details'),
+    path('addtocart',views.add_to_cart,name='addtocart')
 ]
