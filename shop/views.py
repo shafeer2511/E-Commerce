@@ -5,6 +5,7 @@ from django.contrib import messages
 from .form import CustomUserForm
 from django.contrib.auth import login,logout,authenticate
 import json
+
 def home(request):
     products=Product.objects.filter(trending=1)
     return render(request,'shop/index.html',{'products':products})
@@ -34,7 +35,38 @@ def add_to_cart(request):
         
     else:
         return JsonResponse({'status':'Invalid Access'}, status=403)
+def fav_page(request):
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # Fix the value
+
+        if request.user.is_authenticated:
+            data=json.load(request)
+            product_id=(data['pid'])
+            # print(request.user.id)
+            product_status=Product.objects.get(id=product_id)
+            if product_status:
+                if Favorite.objects.filter(user=request.user.id,product_id=product_id):
+                    return JsonResponse({'status':'Product Already in Favorite'},status=200)
+                else:
+                    Favorite.objects.create(user=request.user,product_id=product_id)
+                    return JsonResponse({'status':'Product Added to Favorite'},status=200)
+                    
+        else:
+            return JsonResponse({'status':'Login to Add Favorite'},status=401)
+    else:
+        return JsonResponse({'status':'Invalid Access'}, status=403)
     
+def favviewpage(request):
+    if request.user.is_authenticated:
+        fav=Favorite.objects.filter(user=request.user)
+        return render(request,'shop/fav.html',{"fav":fav})
+    else:
+        return redirect("/")
+    
+def remove_fav(request,fid):
+    fav_item=Favorite.objects.get(id=fid)
+    fav_item.delete()
+    return redirect('/favviewpage')
+
 def cart_page(request):
     if request.user.is_authenticated:
         cart=Cart.objects.filter(user=request.user)
@@ -83,7 +115,6 @@ def register(request):
         form = CustomUserForm()  # Display an empty form for GET requests
     
     return render(request, 'shop/register.html', {'form': form})
-
 
 
 def collection(request):
